@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-  
-const Container = ({children}) => {
+
+const Container = ({ children }) => {
     return (
         <div class="container mx-auto">
             {children}
