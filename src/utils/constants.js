@@ -1,3 +1,3 @@
-const BASE_URL = 'https://emilywken.herokuapp.com'
+const BASE_URL = 'https://emilywken.onrender.com'
 
 export { BASE_URL }
