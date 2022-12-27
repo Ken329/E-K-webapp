@@ -1,5 +1,4 @@
 import {
-    PencilIcon,
     TrashIcon,
     ArrowPathIcon
 } from '@heroicons/react/24/outline'
@@ -11,7 +10,6 @@ export default function Countdown(props) {
             <div class="absolute top-0 flex w-full">
                 <div class="w-1/2 p-1"><ArrowPathIcon class="w-4 h-4 text-blue-300 md:w-6 md:h-6" /></div>
                 <div class="w-1/2 p-1 flex justify-end">
-                    <PencilIcon class="w-4 h-4 cursor-pointer mx-2 text-blue-300 md:w-6 md:h-6" />
                     <TrashIcon class="w-4 h-4 cursor-pointer mx-2 text-blue-300 md:w-6 md:h-6" />
                 </div>
             </div>

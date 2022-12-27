@@ -9,7 +9,6 @@ import Timer from './timer'
 import { deleteReminder } from '../../../network/reminder'
 
 export default function Countdown(props) {
-
     const onclick = async (id) => {
         const data = await deleteReminder(id)
         if (data.success) {

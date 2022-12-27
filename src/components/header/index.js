@@ -69,13 +69,13 @@ export default function Header() {
                   <Link to="/memo" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Memo
                   </Link>
-                  <Link to="/memory" clbuttonssName="text-base font-medium text-gray-500 hover:text-gray-900">
+                  <Link to="/memory" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Memory
                   </Link>
                   <Link to="/todo" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     To Do List
                   </Link>
-                  <Link to="/reminder" className="text-base font-medium text-gray-500 hover:text-gray-900" v>
+                  <Link to="/reminder" className="text-base font-medium text-gray-500 hover:text-gray-900">
                     Reminder
                   </Link>
                 </Popover.Group>

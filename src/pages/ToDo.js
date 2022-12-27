@@ -54,7 +54,7 @@ function ToDoList() {
           ready ?
             <>
               <Header />
-              <div class="py-8 mx-auto">
+              <div class="pt-8 pb-40 mx-auto">
                 <Plus insertFunc={setInsertResponse} />
                 {
                   list.map(({ id, message, checked }) => {

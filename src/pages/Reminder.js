@@ -70,7 +70,7 @@ function Reminder() {
                     ready ?
                         <>
                             <Header />
-                            <div class="py-8 mx-auto grid grid-cols-1 gap-1 mx-2 px-2 overflow-y-auto sm:grid-cols-2 gap-2">
+                            <div class="pt-8 pb-40 mx-auto grid grid-cols-1 gap-1 mx-2 px-2 overflow-y-auto sm:grid-cols-2 gap-2">
                                 <Plus insertFunc={setInsertResponse} />
                                 {
                                     list.map(({ id, date, title, message, type, years }) => {

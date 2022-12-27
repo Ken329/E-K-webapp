@@ -100,7 +100,7 @@ function Welcome() {
                                     : <></>
                             }
                             <Header />
-                            <div class="py-8 mx-auto grid grid-cols-1 gap-1 mx-2 px-2 overflow-y-auto lg:grid-cols-4 gap-4 md:grid-cols-3 gap-3 sm:grid-cols-2 gap-2">
+                            <div class="pt-8 pb-40 mx-auto grid grid-cols-1 gap-1 mx-2 px-2 overflow-y-auto lg:grid-cols-4 gap-4 md:grid-cols-3 gap-3 sm:grid-cols-2 gap-2">
                                 <Plus insertFunc={setInsertResponse} />
                                 {
                                     list.map(({ id, name, question, hint }) => {
