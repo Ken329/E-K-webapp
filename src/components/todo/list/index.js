@@ -13,20 +13,25 @@ export default function List(props) {
     }
   }
   return (
-    <div class="bg-blue-100 shadow-inner rounded-md p-4 my-5 mx-2 flex items-center justify-between cursor-pointer md:mx-0" onClick={() => onclick(props.id, props.checked)}>
+    <div
+      className="bg-blue-100 shadow-inner rounded-md p-4 my-5 mx-2 flex items-center justify-between cursor-pointer md:mx-0"
+      onClick={() => onclick(props.id, props.checked)}
+    >
       <p>{props.children}</p>
-      {
-        props.checked
-          ? <div class="w-auto"><CheckIcon class="w-6 h-6 text-green-400" /></div>
-          : <></>
-      }
+      {props.checked ? (
+        <div className="w-auto">
+          <CheckIcon class="w-6 h-6 text-green-400" />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }
 
-List.defaultProps = {
+List.propTypes = {
   id: PropTypes.string,
   children: PropTypes.string,
   checked: PropTypes.string,
-  updateFunc: PropTypes.func
+  updateFunc: PropTypes.func,
 }

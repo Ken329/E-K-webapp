@@ -1,14 +1,14 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 import Login from './pages/Login'
-import Memo from './pages/Memo';
-import ToDo from './pages/ToDo';
+import Memo from './pages/Memo'
+import ToDo from './pages/ToDo'
 import Reminder from './pages/Reminder'
 import Memory from './pages/Memory'
 
-import PrivateRoutes from './components/privateRoutes';
-import './App.css';
+import PrivateRoutes from './components/privateRoutes'
+import './App.css'
 
 function App() {
   return (
@@ -33,7 +33,7 @@ function App() {
         </Route>
       </Routes>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -2,15 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Container = ({ children }) => {
-    return (
-        <div class="container mx-auto">
-            {children}
-        </div>
-    )
+  return <div className="container mx-auto">{children}</div>
 }
 
-Container.defaultProps = {
-    children: PropTypes.string,
+Container.propTypes = {
+  children: PropTypes.string,
 }
 
-export default Container;
+export default Container
