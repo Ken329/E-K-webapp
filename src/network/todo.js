@@ -1,10 +1,25 @@
-import axios from 'axios'
-import { BASE_URL } from '../utils/constants'
+import axiosInstances from './api'
 
-export const getTodoList = async () => {
+export const getTodoList = async (auth) => {
   try {
-    const response = await axios
-      .get(`${BASE_URL}/api/todo`)
+    const todoInstance = axiosInstances(auth.token)
+    const response = await todoInstance.get(`/api/todo`).then((response) => {
+      const { status, data } = response
+      if (status < 400) {
+        return data
+      }
+    })
+    return response
+  } catch (error) {
+    return error.message
+  }
+}
+
+export const insertTodo = async (auth, payload) => {
+  try {
+    const todoInstance = axiosInstances(auth.token)
+    const response = await todoInstance
+      .post(`/api/todo`, payload)
       .then((response) => {
         const { status, data } = response
         if (status < 400) {
@@ -17,26 +32,11 @@ export const getTodoList = async () => {
   }
 }
 
-export const insertTodo = async (payload) => {
+export const updateTodo = async (auth, payload) => {
   try {
-    const response = await axios
-      .post(`${BASE_URL}/api/todo`, payload)
-      .then((response) => {
-        const { status, data } = response
-        if (status < 400) {
-          return data
-        }
-      })
-    return response
-  } catch (error) {
-    return error.message
-  }
-}
-
-export const updateTodo = async (payload) => {
-  try {
-    const response = await axios
-      .put(`${BASE_URL}/api/todo`, payload)
+    const todoInstance = axiosInstances(auth.token)
+    const response = await todoInstance
+      .put(`/api/todo`, payload)
       .then((response) => {
         const { status, data } = response
         if (status < 400) {

@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 
 import Timer from './timer'
 import { deleteReminder } from '../../../network/reminder'
+import useAuth from '../../../hooks/useAuth'
 
 export default function Countdown(props) {
+  const { auth } = useAuth()
+
   const onClick = async (e, id) => {
     e.preventDefault()
 
-    const data = await deleteReminder(id)
+    const data = await deleteReminder(auth, id)
     if (data.success) {
       props.deleteFunc(data.data)
     } else {

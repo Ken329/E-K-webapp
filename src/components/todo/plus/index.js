@@ -3,15 +3,18 @@ import PropTypes from 'prop-types'
 import { PlusIcon } from '@heroicons/react/24/outline'
 
 import { insertTodo } from '../../../network/todo'
+import useAuth from '../../../hooks/useAuth'
 
 export default function Plus(props) {
   const [click, setClick] = useState(false)
   const [value, setValue] = useState('')
 
+  const { auth } = useAuth()
+
   const onsubmit = async (event) => {
     event.preventDefault()
 
-    const data = await insertTodo({ message: value, checked: false })
+    const data = await insertTodo(auth, { message: value, checked: false })
     if (data.success) {
       props.insertFunc(data.data)
       setValue('')
@@ -32,7 +35,7 @@ export default function Plus(props) {
           <form onSubmit={onsubmit} className="flex w-full">
             <input
               type="textarea"
-              className="block w-4/5 p-4 mt-3 text-gray-800 italic border border-gray-300 rounded-lg bg-gray-50 text-sm outline-none mr-2 md:text-md w-full focus:border-gray-400"
+              className="block w-4/5 p-4 mt-3 text-gray-800 italic border border-gray-300 rounded-lg bg-gray-50 text-sm outline-none mr-2 md:text-md md:w-full focus:border-gray-400"
               onChange={(event) => setValue(event.target.value)}
               required
             />

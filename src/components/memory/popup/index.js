@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { updateMemory, deleteMemory } from '../../../network/memory'
+import useAuth from '../../../hooks/useAuth'
 
 export default function Popup(props) {
   const { id, name, question, password, hint, images } = props.data
@@ -11,10 +12,12 @@ export default function Popup(props) {
   const [Password, setPassword] = useState(password)
   const [Hint, setHint] = useState(hint)
 
+  const { auth } = useAuth()
+
   const onSubmit = async (event) => {
     event.preventDefault()
 
-    const data = await updateMemory({
+    const data = await updateMemory(auth, {
       id,
       question: Question,
       password: Password,
@@ -31,7 +34,7 @@ export default function Popup(props) {
   const onDelete = async (event) => {
     event.preventDefault()
 
-    const data = await deleteMemory(id, { name, length: images.length })
+    const data = await deleteMemory(auth, id, { name, length: images.length })
     if (data.success) {
       props.deleteFunc(data.data)
       props.onCloseFunc(false)

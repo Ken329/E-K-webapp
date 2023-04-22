@@ -16,28 +16,27 @@ import useAuth from '../../hooks/useAuth'
 const headers = [
   {
     name: 'Memo',
-    description:
-      'Get a better understanding of where your traffic is coming from.',
     to: '/memo',
     icon: ChartBarIcon,
   },
   {
     name: 'Memory',
-    description: 'Speak directly to your customers in a more meaningful way.',
     to: '/memory',
     icon: CursorArrowRaysIcon,
   },
   {
     name: 'To Do List',
-    description: "Connect with third-party tools that you're already using.",
     to: '/todo',
     icon: Squares2X2Icon,
   },
   {
     name: 'Reminder',
-    description:
-      'Build strategic funnels that will drive your customers to convert',
     to: '/reminder',
+    icon: ArrowPathIcon,
+  },
+  {
+    name: 'Storybaord',
+    to: '/storyboard',
     icon: ArrowPathIcon,
   },
 ]
@@ -51,11 +50,7 @@ export default function Header() {
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
               <span className="sr-only">Ken & Emma</span>
-              <img
-                className="h-12 w-12 w-auto sm:h-18 sm:w-18"
-                src={logo}
-                alt=""
-              />
+              <img className="h-12 w-12 sm:h-18 sm:w-18" src={logo} alt="" />
             </a>
           </div>
           {auth.token ? (
@@ -70,30 +65,15 @@ export default function Header() {
                 </Popover.Button>
               </div>
               <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-                <Link
-                  to="/memo"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  Memo
-                </Link>
-                <Link
-                  to="/memory"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  Memory
-                </Link>
-                <Link
-                  to="/todo"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  To Do List
-                </Link>
-                <Link
-                  to="/reminder"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  Reminder
-                </Link>
+                {headers.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.to}
+                    className="text-base font-medium text-gray-500 hover:text-gray-900"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
               </Popover.Group>
             </>
           ) : (

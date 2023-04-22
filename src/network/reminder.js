@@ -1,10 +1,10 @@
-import axios from 'axios'
-import { BASE_URL } from '../utils/constants'
+import axiosInstances from './api'
 
-export const getReminderList = async () => {
+export const getReminderList = async (auth) => {
   try {
-    const response = await axios
-      .get(`${BASE_URL}/api/reminder`)
+    const reminderInstance = axiosInstances(auth.token)
+    const response = await reminderInstance
+      .get(`/api/reminder`)
       .then((response) => {
         const { status, data } = response
         if (status < 400) {
@@ -17,10 +17,11 @@ export const getReminderList = async () => {
   }
 }
 
-export const insertReminder = async (payload) => {
+export const insertReminder = async (auth, payload) => {
   try {
-    const response = await axios
-      .post(`${BASE_URL}/api/reminder`, payload)
+    const reminderInstance = axiosInstances(auth.token)
+    const response = await reminderInstance
+      .post(`/api/reminder`, payload)
       .then((response) => {
         const { status, data } = response
         if (status < 400) {
@@ -33,10 +34,11 @@ export const insertReminder = async (payload) => {
   }
 }
 
-export const deleteReminder = async (id) => {
+export const deleteReminder = async (auth, id) => {
   try {
-    const response = await axios
-      .delete(`${BASE_URL}/api/reminder/${id}`)
+    const reminderInstance = axiosInstances(auth.token)
+    const response = await reminderInstance
+      .delete(`/api/reminder/${id}`)
       .then((response) => {
         const { status, data } = response
         if (status < 400) {

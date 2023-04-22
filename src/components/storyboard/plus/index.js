@@ -2,16 +2,15 @@ import { useState } from 'react'
 import { PlusIcon, ClipboardDocumentIcon } from '@heroicons/react/24/outline'
 import PropTypes from 'prop-types'
 
-import { insertMemory } from '../../../network/memory'
+import { insertStoryBoard } from '../../../network/storybaord'
 import { fileToBase64 } from '../../../utils/helpers'
 import useAuth from '../../../hooks/useAuth'
 
 export default function Plus(props) {
   const [click, setClick] = useState(false)
-  const [name, setName] = useState('')
-  const [question, setQuestion] = useState('')
-  const [password, setPassword] = useState('')
-  const [hint, setHint] = useState('')
+  const [title, setTitle] = useState('')
+  const [date, setDate] = useState('')
+  const [description, setDescription] = useState('')
   const [pictures, setPictures] = useState(null)
 
   const { auth } = useAuth()
@@ -21,27 +20,30 @@ export default function Plus(props) {
 
     let pictureList = []
 
-    for (let i = 0; i < pictures.length; i++) {
-      const result = await fileToBase64(pictures[i])
-      pictureList.push(result)
-    }
-
-    const data = await insertMemory(auth, {
-      name,
-      question,
-      password,
-      hint,
-      pictures: pictureList,
-    })
-    if (data.success) {
-      props.insertFunc(data.data)
-      setName('')
-      setPassword('')
-      setHint('')
-      setPictures(null)
-      setClick(false)
+    if (pictures.length > 1) {
+      alert('Only one pictures is allow to be insert')
     } else {
-      alert(data)
+      for (let i = 0; i < pictures.length; i++) {
+        const result = await fileToBase64(pictures[i])
+        pictureList.push(result)
+      }
+
+      const data = await insertStoryBoard(auth, {
+        title,
+        date,
+        description,
+        picture: pictureList,
+      })
+      if (data.success) {
+        props.insertFunc(data.data)
+        setTitle('')
+        setDate('')
+        setDescription('')
+        setPictures(null)
+        setClick(false)
+      } else {
+        alert(data)
+      }
     }
   }
 
@@ -49,8 +51,8 @@ export default function Plus(props) {
     <div
       className={
         !click
-          ? 'bg-blue-100 shadow-lg shadow-white-500/50 rounded-tl-2xl rounded-br-2xl p-4 flex flex-col items-center justify-center'
-          : 'bg-blue-100 shadow-lg shadow-white-500/50 rounded-tl-2xl rounded-br-2xl p-4 flex flex-col'
+          ? 'w-full bg-blue-100 shadow-lg shadow-white-500/50 rounded-tl-2xl rounded-br-2xl p-4 flex flex-col mb-4 items-center justify-center'
+          : 'w-full bg-blue-100 shadow-lg shadow-white-500/50 rounded-tl-2xl rounded-br-2xl p-4 flex flex-col mb-4'
       }
     >
       {!click ? (
@@ -65,38 +67,29 @@ export default function Plus(props) {
               <ClipboardDocumentIcon class="h-6 w-6 text-blue-300" />
             </div>
             <div className="mt-3 flex flex-col">
-              <label className="ml-2 text-sm md:text-md">Memory Name</label>
+              <label className="ml-2 text-sm md:text-md">Title</label>
               <input
                 type="text"
                 className="w-full px-4 py-2 mt-1 text-gray-800 italic border border-gray-300 rounded-lg bg-gray-50 text-sm outline-none md:text-md focus:border-gray-400"
-                onChange={(event) => setName(event.target.value)}
+                onChange={(event) => setTitle(event.target.value)}
                 required
               />
             </div>
             <div className="mt-3 flex flex-col">
-              <label className="ml-2 text-sm md:text-md">Question</label>
+              <label className="ml-2 text-sm md:text-md">Date</label>
               <input
-                type="text"
+                type="date"
                 className="w-full px-4 py-2 mt-1 text-gray-800 italic border border-gray-300 rounded-lg bg-gray-50 text-sm outline-none md:text-md focus:border-gray-400"
-                onChange={(event) => setQuestion(event.target.value)}
+                onChange={(event) => setDate(event.target.value)}
                 required
               />
             </div>
             <div className="mt-3 flex flex-col">
-              <label className="ml-2 text-sm md:text-md">Password</label>
-              <input
-                type="password"
-                className="w-full px-4 py-2 mt-1 text-gray-800 italic border border-gray-300 rounded-lg bg-gray-50 text-sm outline-none md:text-md focus:border-gray-400"
-                onChange={(event) => setPassword(event.target.value)}
-                required
-              />
-            </div>
-            <div className="mt-3 flex flex-col">
-              <label className="ml-2 text-sm md:text-md">Hint</label>
+              <label className="ml-2 text-sm md:text-md">Description</label>
               <input
                 type="text"
                 className="w-full px-4 py-2 mt-1 text-gray-800 italic border border-gray-300 rounded-lg bg-gray-50 text-sm outline-none md:text-md focus:border-gray-400"
-                onChange={(event) => setHint(event.target.value)}
+                onChange={(event) => setDescription(event.target.value)}
                 required
               />
             </div>

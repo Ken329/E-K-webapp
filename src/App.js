@@ -6,6 +6,7 @@ import Memo from './pages/Memo'
 import ToDo from './pages/ToDo'
 import Reminder from './pages/Reminder'
 import Memory from './pages/Memory'
+import StoryBoard from './pages/StoryBoard'
 
 import PrivateRoutes from './components/privateRoutes'
 import './App.css'
@@ -30,6 +31,10 @@ function App() {
 
         <Route element={<PrivateRoutes />}>
           <Route path="memory" element={<Memory />} />
+        </Route>
+
+        <Route element={<PrivateRoutes />}>
+          <Route path="storyboard" element={<StoryBoard />} />
         </Route>
       </Routes>
     </>

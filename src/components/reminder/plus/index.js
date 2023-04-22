@@ -3,6 +3,7 @@ import { PlusIcon, ClipboardDocumentIcon } from '@heroicons/react/24/outline'
 import PropTypes from 'prop-types'
 
 import { insertReminder } from '../../../network/reminder'
+import useAuth from '../../../hooks/useAuth'
 
 export default function Plus(props) {
   const [click, setClick] = useState(false)
@@ -11,12 +12,14 @@ export default function Plus(props) {
   const [message, setMessage] = useState('')
   const [recursion, setRecurssion] = useState('')
 
+  const { auth } = useAuth()
+
   const onsubmit = async (event) => {
     event.preventDefault()
 
     const type = recursion === 'False' ? 'single' : 'recursion'
 
-    const data = await insertReminder({ title, date, message, type })
+    const data = await insertReminder(auth, { title, date, message, type })
     if (data.success) {
       props.insertFunc(data.data)
       setTitle('')
