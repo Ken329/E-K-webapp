@@ -2,10 +2,13 @@ import PropTypes from 'prop-types'
 import { CheckIcon } from '@heroicons/react/24/outline'
 
 import { updateTodo } from '../../../network/todo'
+import useAuth from '../../../hooks/useAuth'
 
 export default function List(props) {
+  const { auth } = useAuth()
+
   const onclick = async (id, checked) => {
-    const data = await updateTodo({ id, checked: !checked })
+    const data = await updateTodo(auth, { id, checked: !checked })
     if (data.success) {
       props.updateFunc(data.data)
     } else {

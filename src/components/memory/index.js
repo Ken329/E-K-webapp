@@ -2,15 +2,18 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { getMemoryById } from '../../network/memory'
+import useAuth from '../../hooks/useAuth'
 
 export default function Plus(props) {
   const [click, setClick] = useState(false)
   const [answer, setAnswer] = useState('')
 
+  const { auth } = useAuth()
+
   const onsubmit = async (event) => {
     event.preventDefault()
 
-    const data = await getMemoryById({ id: props.id, answer })
+    const data = await getMemoryById(auth, { id: props.id, answer })
     if (data.success) {
       props.answerFunc(data.data)
       setAnswer('')

@@ -10,6 +10,7 @@ import List from '../components/todo/list'
 import Plus from '../components/todo/plus'
 
 import { getTodoList } from '../network/todo'
+import useAuth from '../hooks/useAuth'
 
 function ToDoList() {
   const [ready, setReady] = useState(false)
@@ -17,8 +18,10 @@ function ToDoList() {
   const [insertResponse, setInsertResponse] = useState({})
   const [updateResponse, setUpdateResponse] = useState({})
 
+  const { auth } = useAuth()
+
   useEffect(async () => {
-    const data = await getTodoList()
+    const data = await getTodoList(auth)
     if (data.success) {
       setList(data.data)
       setReady(true)

@@ -13,6 +13,7 @@ import Plus from '../components/reminder/plus'
 
 import { reminderTransformation } from '../utils/helpers'
 import { getReminderList } from '../network/reminder'
+import useAuth from '../hooks/useAuth'
 
 function Reminder() {
   const [ready, setReady] = useState(true)
@@ -20,8 +21,10 @@ function Reminder() {
   const [insertResponse, setInsertResponse] = useState({})
   const [deleteResponse, setDeleteResponse] = useState({})
 
+  const { auth } = useAuth()
+
   useEffect(async () => {
-    const data = await getReminderList()
+    const data = await getReminderList(auth)
     if (data.success) {
       const transformedData = reminderTransformation(data.data)
       setList(transformedData)

@@ -11,6 +11,7 @@ import Plus from '../components/memory/plus'
 import Popup from '../components/memory/popup'
 
 import { getMemoryList } from '../network/memory'
+import useAuth from '../hooks/useAuth'
 
 function Welcome() {
   const [ready, setReady] = useState(false)
@@ -22,8 +23,10 @@ function Welcome() {
   const [popup, setPopup] = useState(false)
   const [popupData, setPopupData] = useState({})
 
+  const { auth } = useAuth()
+
   useEffect(async () => {
-    const data = await getMemoryList()
+    const data = await getMemoryList(auth)
     if (data.success) {
       setList(data.data)
       setReady(true)

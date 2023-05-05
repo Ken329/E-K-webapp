@@ -1,10 +1,10 @@
-import axios from 'axios'
-import { BASE_URL } from '../utils/constants'
+import axiosInstances from './api'
 
-export const getMemoryList = async () => {
+export const getMemoryList = async (auth) => {
   try {
-    const response = await axios
-      .get(`${BASE_URL}/api/memory`)
+    const memoryInstance = axiosInstances(auth.token)
+    const response = await memoryInstance
+      .get(`/api/memory`)
       .then((response) => {
         const { status, data } = response
         if (status < 400) {
@@ -17,10 +17,11 @@ export const getMemoryList = async () => {
   }
 }
 
-export const getMemoryById = async (payload) => {
+export const getMemoryById = async (auth, payload) => {
   try {
-    const response = await axios
-      .post(`${BASE_URL}/api/memoryById`, payload)
+    const memoryInstance = axiosInstances(auth.token)
+    const response = await memoryInstance
+      .post(`/api/memoryById`, payload)
       .then((response) => {
         const { status, data } = response
         if (status < 400) {
@@ -33,10 +34,11 @@ export const getMemoryById = async (payload) => {
   }
 }
 
-export const insertMemory = async (payload) => {
+export const insertMemory = async (auth, payload) => {
   try {
-    const response = await axios
-      .post(`${BASE_URL}/api/memory`, payload)
+    const memoryInstance = axiosInstances(auth.token)
+    const response = await memoryInstance
+      .post(`/api/memory`, payload)
       .then((response) => {
         const { status, data } = response
         if (status < 400) {
@@ -49,10 +51,11 @@ export const insertMemory = async (payload) => {
   }
 }
 
-export const updateMemory = async (payload) => {
+export const updateMemory = async (auth, payload) => {
   try {
-    const response = await axios
-      .put(`${BASE_URL}/api/memory`, payload)
+    const memoryInstance = axiosInstances(auth.token)
+    const response = await memoryInstance
+      .put(`/api/memory`, payload)
       .then((response) => {
         const { status, data } = response
         if (status < 400) {
@@ -65,10 +68,11 @@ export const updateMemory = async (payload) => {
   }
 }
 
-export const deleteMemory = async (id, payload) => {
+export const deleteMemory = async (auth, id, payload) => {
   try {
-    const response = await axios
-      .delete(`${BASE_URL}/api/memory/${id}`, payload)
+    const memoryInstance = axiosInstances(auth.token)
+    const response = await memoryInstance
+      .delete(`/api/memory/${id}`, payload)
       .then((response) => {
         const { status, data } = response
         if (status < 400) {
